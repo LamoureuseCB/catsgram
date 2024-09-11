@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/users")
 @RequiredArgsConstructor
+@RequestMapping("/users")
+
 public class UserController {
     private final UserService userService;
     @GetMapping
