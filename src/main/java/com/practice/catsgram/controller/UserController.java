@@ -1,7 +1,6 @@
 package com.practice.catsgram.controller;
 
-import com.practice.catsgram.exceptions.InvalidEmailException;
-import com.practice.catsgram.exceptions.UserAlreadyExistException;
+
 import com.practice.catsgram.model.User;
 import com.practice.catsgram.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,14 @@ public class UserController {
        return userService.create(user);
     }
 
+
     @PutMapping
     public User update(@RequestBody User user){
         return userService.update(user);
     }
+    @GetMapping("/{email}")
+    public User findUserByEmail(@PathVariable String email) {
+        return userService.findUserByEmail(email);
+    }
+
 }

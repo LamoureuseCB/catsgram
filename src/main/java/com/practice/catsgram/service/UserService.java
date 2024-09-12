@@ -31,6 +31,7 @@ public class UserService {
         return user;
     }
 
+
     public User update(User user) {
         if (user.getEmail() == null || user.getEmail().isBlank()) {
             throw new InvalidEmailException("Почта пользователя не может быть пустой");
@@ -38,5 +39,10 @@ public class UserService {
 
         users.put(user.getEmail(), user);
         return user;
+    }
+
+    public User findUserByEmail(String email) {
+        return users.get(email);
+
     }
 }
