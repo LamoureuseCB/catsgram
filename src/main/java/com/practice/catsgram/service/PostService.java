@@ -16,7 +16,7 @@ public class PostService {
     private final UserService userService;
     private List<Post> posts = new ArrayList<>();
 
-    public List<Post> findAll() {
+    public List<Post> findAll( String sort, int size, int from) {
         return posts;
     }
 
