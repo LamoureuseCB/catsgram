@@ -1,13 +1,21 @@
 package com.practice.catsgram.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Instant;
 
+@Getter
+@Setter
 public class Post {
 
     private final String author; // автор
     private final Instant creationDate = Instant.now(); // дата создания
     private String description; // описание
-    private String photoUrl; // url-адрес фотографии
+    private String photoUrl;
+    private int id;
+
+
 
     public Post(String author, String description, String photoUrl) {
         this.author = author;
@@ -15,27 +23,4 @@ public class Post {
         this.photoUrl = photoUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
 }

@@ -1,7 +1,5 @@
 package com.practice.catsgram.controller;
 
-import com.practice.catsgram.exceptions.InvalidEmailException;
-import com.practice.catsgram.exceptions.UserAlreadyExistException;
 import com.practice.catsgram.model.User;
 import com.practice.catsgram.service.UserService;
 import lombok.RequiredArgsConstructor;
