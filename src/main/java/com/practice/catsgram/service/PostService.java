@@ -20,8 +20,8 @@ public class PostService {
     private static int postId = 0;
 
     public List<Post> findAll(Integer size, String sort, Integer from) {
-        List<Post> ascSortedPosts = new ArrayList<>();
-        ascSortedPosts = posts.stream()
+
+        List<Post> ascSortedPosts = posts.stream()
                 .sorted((post1, post2) -> {
                     if ("asc".equals(sort)) {
                         return post1.getCreationDate().compareTo(post2.getCreationDate());
@@ -29,14 +29,12 @@ public class PostService {
                         return post2.getCreationDate().compareTo(post1.getCreationDate());
                     }
                 }).toList();
-        List<Post> sizeDateSortedPosts = new ArrayList<>();
-        sizeDateSortedPosts = ascSortedPosts.stream().
+
+
+        return ascSortedPosts.stream().
                 skip(from).
                 limit(size).
                 toList();
-
-
-        return sizeDateSortedPosts;
 
     }
 

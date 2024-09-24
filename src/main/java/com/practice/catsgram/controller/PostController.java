@@ -1,11 +1,14 @@
 package com.practice.catsgram.controller;
 
+import com.practice.catsgram.exceptions.IncorrectParameterException;
 import com.practice.catsgram.model.Post;
 import com.practice.catsgram.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.practice.catsgram.utils.Constants.SORTS;
 
 
 @RestController
@@ -18,9 +21,16 @@ public class PostController {
     public List<Post> findAll(@RequestParam(value = "size") Integer size,
                               @RequestParam(value = "sort") String sort,
                               @RequestParam(value = "page") Integer page) {
-        int from = page * size;// нашла в интернете формулу расчета пагинации,
-//        page — номер страницы (начиная с 0),
-//        size — количество элементов на странице
+        if (!SORTS.contains(sort)) {
+            throw new IncorrectParameterException("sort");
+        }
+        if (page < 0) {
+            throw new IncorrectParameterException("page");
+        }
+        if (size <= 0) {
+            throw new IncorrectParameterException("size");
+        }
+        int from = page * size;
 
         return postService.findAll(size, sort, from);
     }
