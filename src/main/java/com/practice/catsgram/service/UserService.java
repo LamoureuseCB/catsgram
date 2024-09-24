@@ -26,11 +26,9 @@ public class UserService {
         if (users.containsKey(user.getEmail())) {
             throw new UserAlreadyExistException("Пользователь с такой почтой уже существует");
         }
-
         users.put(user.getEmail(), user);
         return user;
     }
-
 
     public User update(User user) {
         if (user.getEmail() == null || user.getEmail().isBlank()) {
@@ -42,7 +40,10 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) {
-        return users.get(email);
+        if (users.containsKey(email)) {
+            return users.get(email);
+        }
+        return null;
 
     }
 }

@@ -7,21 +7,20 @@ import java.time.Instant;
 
 @Getter
 @Setter
-
 public class Post {
-    private int id;
 
     private final String author; // автор
     private final Instant creationDate = Instant.now(); // дата создания
     private String description; // описание
-    private String photoUrl; // url-адрес фотографии
+    private String photoUrl;
+    private int id;
 
-    public Post(String author, String description, String photoUrl, int id) {
+
+
+    public Post(String author, String description, String photoUrl) {
         this.author = author;
         this.description = description;
         this.photoUrl = photoUrl;
-        this.id = id;
     }
-
 
 }

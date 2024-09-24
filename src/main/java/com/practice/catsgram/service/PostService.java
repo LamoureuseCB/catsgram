@@ -1,6 +1,7 @@
 package com.practice.catsgram.service;
 
 import com.practice.catsgram.exceptions.InvalidEmailException;
+import com.practice.catsgram.exceptions.PostNotFoundException;
 import com.practice.catsgram.exceptions.UserNotFoundException;
 import com.practice.catsgram.model.Post;
 import com.practice.catsgram.model.User;
@@ -10,14 +11,33 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final UserService userService;
     private List<Post> posts = new ArrayList<>();
+    private static int postId = 0;
 
-    public List<Post> findAll( String sort, int size, int from) {
-        return posts;
+    public List<Post> findAll(Integer size, String sort, Integer from) {
+        List<Post> ascSortedPosts = new ArrayList<>();
+        ascSortedPosts = posts.stream()
+                .sorted((post1, post2) -> {
+                    if ("asc".equals(sort)) {
+                        return post1.getCreationDate().compareTo(post2.getCreationDate());
+                    } else {
+                        return post2.getCreationDate().compareTo(post1.getCreationDate());
+                    }
+                }).toList();
+        List<Post> sizeDateSortedPosts = new ArrayList<>();
+        sizeDateSortedPosts = ascSortedPosts.stream().
+                skip(from).
+                limit(size).
+                toList();
+
+
+        return sizeDateSortedPosts;
+
     }
 
     public Post create(Post post) {
@@ -29,16 +49,16 @@ public class PostService {
         if (user == null) {
             throw new UserNotFoundException("Пользователь не найден");
         }
+        post.setId(++postId);
         posts.add(post);
         return post;
     }
 
+    public Post findPostById(int postId) {
+        return posts.stream().
+                filter(post -> postId == post.getId()).findFirst().orElseThrow(() -> new PostNotFoundException(String.format("Пост %d не найден", postId)));
 
-    public Post getPostById(int postId) {
-        return posts.stream()
-                .filter(post -> post.getId() == postId)
-                .findFirst()
-                .orElse(null);
     }
+
 
 }

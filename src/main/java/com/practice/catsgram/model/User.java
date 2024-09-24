@@ -1,11 +1,16 @@
 package com.practice.catsgram.model;
 
-import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
+@Getter
+@Setter
 public class User {
     private String email;
     private String nickname;
     private LocalDate birthdate;
+
 
     public User(String email, String nickname, LocalDate birthdate) {
         this.email = email;
@@ -13,27 +18,5 @@ public class User {
         this.birthdate = birthdate;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
 }
