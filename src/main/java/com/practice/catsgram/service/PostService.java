@@ -31,9 +31,10 @@ public class PostService {
                 }).toList();
         List<Post> sizeDateSortedPosts = new ArrayList<>();
         sizeDateSortedPosts = ascSortedPosts.stream().
+                skip(from).
                 limit(size).
                 toList();
-//        не знаю какой метод у стримов применить к from???
+
 
         return sizeDateSortedPosts;
 
