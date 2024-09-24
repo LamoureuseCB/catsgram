@@ -31,7 +31,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse incorrectParameterHandle(final IncorrectParameterException e){
-        return new ErrorResponse("Ошибка! ", e.getMessage());
+        return new ErrorResponse("Ошибка с полем “наименование поля”", e.getMessage());
     }
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
